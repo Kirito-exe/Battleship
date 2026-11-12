@@ -10,8 +10,9 @@ export default class Gameboard {
     // const submarine = new Ship(3);
     // const patrol = new Ship(2);
     for (let i = 0; i < 10; i++) {
+      this.#board.push([]);
       for (let j = 0; j < 10; j++) {
-        this.#board = new cell();
+        this.#board[i][j] = new cell();
       }
     }
   }
@@ -21,10 +22,13 @@ export default class Gameboard {
       if (this.#board[x][y].ship === null) {
         this.#board[x][y].toggleHit();
         this.#missedAttacks.push(coord);
+        return this.#board[x][y].hitStatus;
       } else {
         this.#board[x][y].toggleHit();
         this.#board[x][y].ship.hit();
       }
+    } else {
+      throw new RangeError("bad coords");
     }
   }
 }
