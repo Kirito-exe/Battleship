@@ -2,7 +2,7 @@ import Ship from "../ship.js";
 
 describe("testing ship", () => {
   test("length test", () => {
-    const ship = new Ship(5);
+    const ship = new Ship(5, "battleship");
     expect(ship.length).toBe(5);
   });
   test("length error", () => {
@@ -10,7 +10,7 @@ describe("testing ship", () => {
     expect(() => new Ship(-9)).toThrow("length is in negatives");
   });
   test("hit test", () => {
-    const ship = new Ship(3);
+    const ship = new Ship(3, "a");
     ship.hit();
     expect(ship.hits).toBe(1);
     expect(ship.isSunk()).toBe(false);
@@ -20,5 +20,9 @@ describe("testing ship", () => {
     ship.hit();
     expect(ship.hits).toBe(3);
     expect(ship.isSunk()).toBe(true);
+  });
+  test("name test", () => {
+    const ship = new Ship(2, "patrol");
+    expect(ship.name).toBe("patrol");
   });
 });
