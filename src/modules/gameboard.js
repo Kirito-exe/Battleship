@@ -73,6 +73,10 @@ export default class Gameboard {
       return true;
     }
   }
+  shipStatus() {
+    const sunkenShips = this.shipsArr.filter((ship) => ship.isSunk());
+    console.log(sunkenShips);
+  }
   get board() {
     return this.#board;
   }
