@@ -1,14 +1,9 @@
-// import Ship from "./ship.js";
+import Ship from "./ship.js";
 import { isSafeMove } from "./helpers.js";
 export default class Gameboard {
   #board = [];
   #missedAttacks = [];
   constructor() {
-    // const carrier = new Ship(5);
-    // const battleship = new Ship(4);
-    // const destroyer = new Ship(3);
-    // const submarine = new Ship(3);
-    // const patrol = new Ship(2);
     for (let i = 0; i < 10; i++) {
       this.#board.push([]);
       for (let j = 0; j < 10; j++) {
@@ -24,12 +19,52 @@ export default class Gameboard {
         this.#missedAttacks.push(coord);
         return this.#board[x][y].hitStatus;
       } else {
+        if (this.#board[x][y].hitStatus === true) {
+          throw new Error("hit once");
+        }
         this.#board[x][y].toggleHit();
         this.#board[x][y].ship.hit();
+        return this.#board[x][y].hitStatus;
       }
     } else {
       throw new RangeError("bad coords");
     }
+  }
+  placeShip(startCoords, shipName, shiplen, alignment = "hori") {
+    const [x, y] = startCoords;
+    if (!isSafeMove(startCoords)) throw new RangeError("bad start coords");
+    if (alignment === "hori") {
+      if (!isSafeMove([x + shiplen, y])) {
+        throw new RangeError("bad end coords");
+      }
+    } else if (alignment === "vert") {
+      if (!isSafeMove([x, y + shiplen])) {
+        throw new RangeError("bad end code");
+      }
+    } else {
+      throw new TypeError("alignment: hori or vert");
+    }
+    for (let i = 0; i < shiplen; i++) {
+      if (alignment === "hori") {
+        if (this.#board[x + i][y].ship !== null) {
+          return `${this.#board[x + i][y].ship.name}`;
+        }
+      } else if (alignment === "vert") {
+        if (this.#board[x][y + i].ship !== null) {
+          return `${this.#board[x][y + i].ship.name}`;
+        }
+      }
+    }
+    for (let i = 0; i < shiplen; i++) {
+      if (alignment === "hori") {
+        this.#board[x + i][y].ship = new Ship(shiplen, shipName);
+      } else if (alignment === "vert") {
+        this.#board[x][y + i].ship = new Ship(shiplen, shipName);
+      }
+    }
+  }
+  get board() {
+    return this.#board;
   }
 }
 class cell {
