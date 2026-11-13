@@ -25,6 +25,8 @@ export default class Gameboard {
         }
         this.#board[x][y].toggleHit();
         this.#board[x][y].ship.hit();
+        if (this.#checkShipSunk(this.#board[x][y].ship))
+          return `${this.#board[x][y].ship.name} sank`;
         return this.#board[x][y].hitStatus;
       }
     } else {
@@ -64,6 +66,11 @@ export default class Gameboard {
       } else if (alignment === "vert") {
         this.#board[x][y + i].ship = newShip;
       }
+    }
+  }
+  #checkShipSunk(ship) {
+    if (ship.isSunk()) {
+      return true;
     }
   }
   get board() {

@@ -14,6 +14,9 @@ describe("receiveAttack", () => {
     gb.receiveAttack([2, 0]);
     expect(() => gb.receiveAttack([1, 0])).toThrow("hit once");
     expect(gb.board[1][0].ship.hits).toBe(2);
+    gb.receiveAttack([3, 0]);
+    gb.receiveAttack([4, 0]);
+    expect(gb.receiveAttack([0, 0])).toBe("carrier sank");
   });
 });
 describe("placeShip", () => {
