@@ -11,8 +11,9 @@ describe("receiveAttack", () => {
   test("hit with a ship", () => {
     expect(gb.receiveAttack([1, 0])).toBe(true);
     expect(gb.board[1][0].ship.hits).toBe(1);
+    gb.receiveAttack([2, 0]);
     expect(() => gb.receiveAttack([1, 0])).toThrow("hit once");
-    expect(gb.board[1][0].ship.hits).toBe(1);
+    expect(gb.board[1][0].ship.hits).toBe(2);
   });
 });
 describe("placeShip", () => {

@@ -3,6 +3,7 @@ import { isSafeMove } from "./helpers.js";
 export default class Gameboard {
   #board = [];
   #missedAttacks = [];
+  shipsArr = [];
   constructor() {
     for (let i = 0; i < 10; i++) {
       this.#board.push([]);
@@ -55,11 +56,13 @@ export default class Gameboard {
         }
       }
     }
+    let newShip = new Ship(shiplen, shipName);
+    this.shipsArr.push(newShip);
     for (let i = 0; i < shiplen; i++) {
       if (alignment === "hori") {
-        this.#board[x + i][y].ship = new Ship(shiplen, shipName);
+        this.#board[x + i][y].ship = newShip;
       } else if (alignment === "vert") {
-        this.#board[x][y + i].ship = new Ship(shiplen, shipName);
+        this.#board[x][y + i].ship = newShip;
       }
     }
   }
