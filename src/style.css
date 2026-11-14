@@ -1,0 +1,19 @@
+body {
+  min-height: 100vh;
+  background-color: blueviolet;
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+}
+.header {
+  display: flex;
+  justify-content: space-evenly;
+}
+.footer {
+  display: grid;
+  place-items: center;
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
