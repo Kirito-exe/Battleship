@@ -37,11 +37,11 @@ export default class Gameboard {
     const [x, y] = startCoords;
     if (!isSafeMove(startCoords)) throw new RangeError("bad start coords");
     if (alignment === "hori") {
-      if (!isSafeMove([x + shiplen, y])) {
+      if (!isSafeMove([x, y + shiplen])) {
         throw new RangeError("bad end coords");
       }
     } else if (alignment === "vert") {
-      if (!isSafeMove([x, y + shiplen])) {
+      if (!isSafeMove([x + shiplen, y])) {
         throw new RangeError("bad end code");
       }
     } else {
@@ -49,12 +49,12 @@ export default class Gameboard {
     }
     for (let i = 0; i < shiplen; i++) {
       if (alignment === "hori") {
-        if (this.#board[x + i][y].ship !== null) {
-          return `${this.#board[x + i][y].ship.name}`;
-        }
-      } else if (alignment === "vert") {
         if (this.#board[x][y + i].ship !== null) {
           return `${this.#board[x][y + i].ship.name}`;
+        }
+      } else if (alignment === "vert") {
+        if (this.#board[x + i][y].ship !== null) {
+          return `${this.#board[x + i][y].ship.name}`;
         }
       }
     }
@@ -62,9 +62,9 @@ export default class Gameboard {
     this.shipsArr.push(newShip);
     for (let i = 0; i < shiplen; i++) {
       if (alignment === "hori") {
-        this.#board[x + i][y].ship = newShip;
-      } else if (alignment === "vert") {
         this.#board[x][y + i].ship = newShip;
+      } else if (alignment === "vert") {
+        this.#board[x + i][y].ship = newShip;
       }
     }
   }
@@ -75,7 +75,7 @@ export default class Gameboard {
   }
   shipStatus() {
     const sunkenShips = this.shipsArr.filter((ship) => ship.isSunk());
-    console.log(sunkenShips);
+    return sunkenShips.map((ship) => ship.name);
   }
   get board() {
     return this.#board;
