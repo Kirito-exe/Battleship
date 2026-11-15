@@ -22,4 +22,19 @@ export class computer extends player {
   isComputer() {
     return true;
   }
+  randomAttack() {
+    const coords = [
+      Math.floor(Math.random() * 10),
+      Math.floor(Math.random() * 10),
+    ];
+    const [x, y] = coords;
+    console.log([x, y]);
+    if (this.gb.board[y][x].hitStatus) {
+      this.randomAttack();
+      console.log("condition ran");
+      return;
+    }
+    this.gb.receiveAttack(coords);
+    return coords;
+  }
 }
