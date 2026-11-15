@@ -14,7 +14,7 @@ export default class Gameboard {
   }
   receiveAttack(coord) {
     if (isSafeMove(coord)) {
-      let [x, y] = coord;
+      let [y, x] = coord;
       if (this.#board[x][y].ship === null) {
         this.#board[x][y].toggleHit();
         this.#missedAttacks.push(coord);
@@ -34,15 +34,15 @@ export default class Gameboard {
     }
   }
   placeShip(startCoords, shipName, shiplen, alignment = "hori") {
-    const [x, y] = startCoords;
+    const [y, x] = startCoords;
     if (!isSafeMove(startCoords)) throw new RangeError("bad start coords");
     if (alignment === "hori") {
       if (!isSafeMove([x, y + shiplen])) {
-        throw new RangeError("bad end coords");
+        return false;
       }
     } else if (alignment === "vert") {
       if (!isSafeMove([x + shiplen, y])) {
-        throw new RangeError("bad end code");
+        return false;
       }
     } else {
       throw new TypeError("alignment: hori or vert");
@@ -67,6 +67,7 @@ export default class Gameboard {
         this.#board[x + i][y].ship = newShip;
       }
     }
+    return true;
   }
   #checkShipSunk(ship) {
     if (ship.isSunk()) {
