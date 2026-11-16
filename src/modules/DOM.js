@@ -12,6 +12,7 @@ export function createBoard(player) {
       cell.addEventListener("click", () => {
         player.board.receiveAttack([j, i]);
         cell.disabled = true;
+        cell.className = "hit";
         if (player.board.board[i][j].ship !== null) {
           cell.style.backgroundColor = "green";
           cell.dataset.ship = player.board.board[i][j].ship.name;
@@ -58,6 +59,32 @@ export function enableBoard(player) {
         cell.disabled = false;
         if (player.board.board[cell.dataset.y][cell.dataset.x].hitStatus) {
           cell.disabled = true;
+          if (
+            player.board.board[cell.dataset.y][cell.dataset.x].ship !== null
+          ) {
+            cell.style.backgroundColor = "green";
+            if (
+              player.board.board[cell.dataset.y][cell.dataset.x].ship.isSunk()
+            ) {
+              isSunkDisplay(board, player);
+            }
+          }
+        }
+      });
+    }
+  });
+}
+
+export function renderBoard(player) {
+  const boards = document.querySelectorAll(".board");
+  boards.forEach((board) => {
+    if (board.dataset.pName === player.name) {
+      const cells = board.querySelectorAll("button");
+      cells.forEach((cell) => {
+        cell.disabled = true;
+        if (player.board.board[cell.dataset.y][cell.dataset.x].hitStatus) {
+          cell.disabled = true;
+          cell.className = "hit";
           if (
             player.board.board[cell.dataset.y][cell.dataset.x].ship !== null
           ) {

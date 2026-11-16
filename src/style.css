@@ -16,4 +16,21 @@ body {
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 2em;
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+}
+.board button {
+  border: 1px solid black;
+}
+.board button:hover {
+  background-color: blue;
+}
+.hit {
+  background-color: orange;
 }
