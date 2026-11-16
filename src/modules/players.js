@@ -37,4 +37,16 @@ export class computer extends player {
     this.gb.receiveAttack(coords);
     return coords;
   }
+  randomShipPlace(name, len, alignment) {
+    let coords = [
+      Math.floor(Math.random() * 10),
+      Math.floor(Math.random() * 10),
+    ];
+    let condition = this.gb.placeShip(coords, name, len, alignment);
+    while (!condition) {
+      console.log("loop ran for " + name);
+      coords = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+      condition = this.gb.placeShip(coords, name, len, alignment);
+    }
+  }
 }

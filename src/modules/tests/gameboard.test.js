@@ -27,16 +27,17 @@ describe("placeShip", () => {
     expect(gb.board[0][2].ship.name).toBe("carrier");
     expect(gb.board[0][3].ship.name).toBe("carrier");
     expect(gb.board[0][4].ship.name).toBe("carrier");
-    expect(gb.placeShip([0, 0], "battleship", 4, "vert")).toBe("carrier");
+    expect(gb.placeShip([0, 0], "battleship", 4, "vert")).toBe(false);
     expect(gb.board[0][0].ship.name).toBe("carrier");
   });
-  gb.placeShip([7, 1], "battleship", 4, "vert");
+
   test("placing ships vert", () => {
+    expect(gb.placeShip([7, 1], "battleship", 4, "vert")).toBe(true);
     expect(gb.board[1][7].ship.name).toBe("battleship");
     expect(gb.board[2][7].ship.name).toBe("battleship");
     expect(gb.board[3][7].ship.name).toBe("battleship");
     expect(gb.board[4][7].ship.name).toBe("battleship");
-    expect(gb.placeShip([7, 1], "idk", 4, "vert")).toBe("battleship");
+    expect(gb.placeShip([7, 1], "idk", 4, "vert")).toBe(false);
   });
   test("error testing", () => {
     expect(() => {

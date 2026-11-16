@@ -50,11 +50,11 @@ export default class Gameboard {
     for (let i = 0; i < shiplen; i++) {
       if (alignment === "hori") {
         if (this.#board[x][y + i].ship !== null) {
-          return `${this.#board[x][y + i].ship.name}`;
+          return false;
         }
       } else if (alignment === "vert") {
         if (this.#board[x + i][y].ship !== null) {
-          return `${this.#board[x + i][y].ship.name}`;
+          return false;
         }
       }
     }
