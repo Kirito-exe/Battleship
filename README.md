@@ -1,2 +1,3 @@
-# rTemplate repository
-Template repos for other repositories to setup
+# BattleShip
+
+BattleShip project for the Odin project
