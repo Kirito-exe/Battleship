@@ -25,7 +25,7 @@ export function gameController() {
   createBoard(comp);
   let active = p1;
   let inactive = comp;
-  function playRound() {
+  async function playRound() {
     if (winningCondition(comp)) {
       winningDialog(p1);
       disableBoard(active);

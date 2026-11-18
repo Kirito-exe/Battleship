@@ -9,9 +9,9 @@ body {
 }
 .header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-bottom: 0.3px solid rgba(255, 255, 255, 0.279);
-  padding: 1em;
+  padding: 1em 6em;
   background-color: #101828;
   color: white;
 }
