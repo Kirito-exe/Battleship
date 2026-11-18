@@ -38,6 +38,15 @@ body {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   padding: 3em;
+  position: relative;
+}
+.board::before {
+  content: attr(data-p-name);
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  color: white;
 }
 .hit {
   background-color: #152035;

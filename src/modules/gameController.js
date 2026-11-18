@@ -19,8 +19,8 @@ export function gameController() {
   buttons.appendChild(random);
   buttons.appendChild(start);
 
-  const comp = new computer("computer");
-  const p1 = new realPlayer("player");
+  const comp = new computer("Computer");
+  const p1 = new realPlayer("Player");
   createBoard(p1);
   createBoard(comp);
   let active = p1;
@@ -32,7 +32,7 @@ export function gameController() {
       disableBoard(inactive);
     }
     if (winningCondition(p1)) {
-      winningCondition(comp);
+      winningDialog(comp);
       disableBoard(active);
       disableBoard(inactive);
     }
@@ -70,6 +70,7 @@ export function gameController() {
 
   function placeShip() {
     random.addEventListener("click", () => {
+      start.disabled = false;
       p1.board.delAllShips();
       p1.randomShipPlace("carrier", 5, randomAlignment());
       p1.randomShipPlace("battleship", 4, randomAlignment());
@@ -80,6 +81,7 @@ export function gameController() {
     });
   }
   function flowControl() {
+    start.disabled = true;
     disableBoard(p1);
     disableBoard(comp);
     placeShip();
