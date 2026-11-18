@@ -81,6 +81,22 @@ export default class Gameboard {
   get board() {
     return this.#board;
   }
+  delShip(name) {
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        if (this.#board[y][x].ship !== null) {
+          if (this.#board[y][x].ship.name === name) {
+            this.#board[y][x].ship = null;
+          }
+        }
+      }
+    }
+  }
+  delAllShips() {
+    this.shipsArr.forEach((ship) => {
+      this.delShip(ship.name);
+    });
+  }
 }
 class cell {
   #hitStatus = false;
