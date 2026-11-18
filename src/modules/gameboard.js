@@ -15,22 +15,19 @@ export default class Gameboard {
   receiveAttack(coord) {
     if (isSafeMove(coord)) {
       let [y, x] = coord;
-      if (this.#board[x][y].ship === null) {
+      if (this.#board[x][y].hitStatus === true) {
+        return false;
+      } else if (this.#board[x][y].ship === null) {
         this.#board[x][y].toggleHit();
         this.#missedAttacks.push(coord);
         return this.#board[x][y].hitStatus;
       } else {
-        if (this.#board[x][y].hitStatus === true) {
-          throw new Error("hit once");
-        }
         this.#board[x][y].toggleHit();
         this.#board[x][y].ship.hit();
-        if (this.#checkShipSunk(this.#board[x][y].ship))
-          return `${this.#board[x][y].ship.name} sank`;
         return this.#board[x][y].hitStatus;
       }
     } else {
-      throw new RangeError("bad coords");
+      return false;
     }
   }
   placeShip(startCoords, shipName, shiplen, alignment = "hori") {
@@ -68,11 +65,6 @@ export default class Gameboard {
       }
     }
     return true;
-  }
-  #checkShipSunk(ship) {
-    if (ship.isSunk()) {
-      return true;
-    }
   }
   shipStatus() {
     const sunkenShips = this.shipsArr.filter((ship) => ship.isSunk());

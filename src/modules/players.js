@@ -36,18 +36,15 @@ export class computer extends player {
   }
   randomAttack(player) {
     console.log("random attack ran");
-    const coords = [
+    let coords = [
       Math.floor(Math.random() * 10),
       Math.floor(Math.random() * 10),
     ];
-    const [x, y] = coords;
-    console.log([x, y]);
-    if (player.board.board[y][x].hitStatus) {
-      this.randomAttack(player);
-      console.log("condition ran");
-      return;
+    let condition = player.board.receiveAttack(coords);
+    console.log(condition);
+    while (!condition) {
+      coords = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+      condition = player.board.receiveAttack(coords);
     }
-    player.board.receiveAttack(coords);
-    return coords;
   }
 }
