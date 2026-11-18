@@ -23,7 +23,6 @@ export function gameController() {
   let inactive = comp;
   function playRound() {
     if (inactive === comp) {
-      disableBoard(active);
       comp.randomAttack(p1);
       renderBoard(p1);
     }
@@ -40,6 +39,7 @@ export function gameController() {
   }
   function startGame() {
     enableBoard(comp);
+    disableBoard(active);
     const boards = document.querySelectorAll(".board");
     comp.randomShipPlace("carrier", 5, "hori");
     comp.randomShipPlace("battleship", 4, "hori");

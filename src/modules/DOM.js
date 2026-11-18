@@ -107,6 +107,7 @@ export function placeShipsRender(player) {
       const cells = board.querySelectorAll("button");
       cells.forEach((cell) => {
         cell.disabled = true;
+        cell.dataset.ship = "";
         if (player.board.board[cell.dataset.y][cell.dataset.x].ship !== null) {
           cell.dataset.ship =
             player.board.board[cell.dataset.y][cell.dataset.x].ship.name;

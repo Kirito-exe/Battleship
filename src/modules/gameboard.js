@@ -73,21 +73,18 @@ export default class Gameboard {
   get board() {
     return this.#board;
   }
-  delShip(name) {
+  delAllShips() {
+    console.log(this.shipsArr);
+    this.shipsArr = [];
+    console.log(this.shipsArr);
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
         if (this.#board[y][x].ship !== null) {
-          if (this.#board[y][x].ship.name === name) {
-            this.#board[y][x].ship = null;
-          }
+          this.#board[y][x].ship = null;
+          console.log(this.#board[y][x].ship);
         }
       }
     }
-  }
-  delAllShips() {
-    this.shipsArr.forEach((ship) => {
-      this.delShip(ship.name);
-    });
   }
 }
 class cell {
