@@ -9,6 +9,7 @@ export function createBoard(player) {
       board.appendChild(cell);
       cell.dataset.x = j;
       cell.dataset.y = i;
+      cell.className = "cell";
       cell.addEventListener("click", () => {
         player.board.receiveAttack([j, i]);
         cell.disabled = true;
@@ -31,7 +32,7 @@ function isSunkDisplay(board, player) {
   const sunkenShips = player.board.shipStatus();
   allCells.forEach((cell) => {
     if (sunkenShips.includes(cell.dataset.ship)) {
-      cell.style.backgroundColor = "yellow";
+      cell.style.backgroundColor = " rgb(0, 66, 0)";
     }
   });
 }
@@ -55,6 +56,7 @@ export function enableBoard(player) {
       const cells = board.querySelectorAll("button");
       cells.forEach((cell) => {
         cell.disabled = false;
+        cell.className = "cell";
         if (player.board.board[cell.dataset.y][cell.dataset.x].hitStatus) {
           cell.disabled = true;
           if (

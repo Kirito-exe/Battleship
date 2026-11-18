@@ -7,14 +7,17 @@ import {
   renderBoard,
 } from "./DOM.js";
 export function gameController() {
+  const buttons = document.querySelector(".buttons");
   const container = document.querySelector(".container");
   const random = document.createElement("button");
   const start = document.createElement("button");
+  buttons.textContent = "";
   start.textContent = "start";
   container.textContent = "";
   random.textContent = "random";
-  container.appendChild(random);
-  container.appendChild(start);
+  buttons.appendChild(random);
+  buttons.appendChild(start);
+
   const comp = new computer("computer");
   const p1 = new realPlayer("player1");
   createBoard(p1);

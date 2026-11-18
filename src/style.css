@@ -1,42 +1,83 @@
 body {
   min-height: 100vh;
-  background-color: blueviolet;
+  background-color: #101828;
   height: 100%;
   display: grid;
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-rows: min-content 5fr 1fr min-content;
+  align-items: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 .header {
   display: flex;
   justify-content: space-evenly;
+  border-bottom: 0.3px solid rgba(255, 255, 255, 0.279);
+  padding: 1em;
+  background-color: #101828;
+  color: white;
 }
 .footer {
   display: grid;
   place-items: center;
+  color: white;
+  border-top: 0.3px solid rgba(255, 255, 255, 0.279);
+  padding: 0.3em;
 }
+
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  gap: 2em;
+  align-items: stretch;
+  justify-items: stretch;
+  gap: 5em;
+  align-self: stretch;
+  padding: 3em;
+  min-width: 40%;
 }
 .board {
   display: grid;
-  grid-template-columns: repeat(10, 50px);
-  grid-template-rows: repeat(10, 50px);
-}
-.board button {
-  border: 1px solid black;
-}
-.board button:hover {
-  background-color: blue;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  padding: 3em;
 }
 .hit {
-  background-color: orange;
+  background-color: #152035;
 }
 .cell {
-  background-color: white;
+  background-color: #07569d;
+  border: 1px solid black;
+}
+.cell:enabled:hover {
+  background-color: #ff0033;
 }
 .hasShip {
   background-color: green;
+}
+.buttons {
+  display: flex;
+  gap: 2em;
+  width: 100%;
+  justify-content: center;
+}
+.buttons button,
+.header button {
+  padding: 0.5em 1.5em;
+  background: none;
+  border: 0.3px solid rgba(255, 255, 255, 0.279);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.buttons button:hover,
+.header button:hover {
+  background-color: white;
+  color: #101828;
+}
+a {
+  color: white;
+}
+.buttons button:disabled {
+  opacity: 0.6;
+}
+.buttons button:hover {
+  background: none;
 }
