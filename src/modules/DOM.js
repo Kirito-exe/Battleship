@@ -28,10 +28,8 @@ export function createBoard(player) {
 
 function isSunkDisplay(board, player) {
   const allCells = board.querySelectorAll("button");
-  console.log(allCells);
   const sunkenShips = player.board.shipStatus();
   allCells.forEach((cell) => {
-    console.log(cell);
     if (sunkenShips.includes(cell.dataset.ship)) {
       cell.style.backgroundColor = "yellow";
     }
@@ -62,7 +60,7 @@ export function enableBoard(player) {
           if (
             player.board.board[cell.dataset.y][cell.dataset.x].ship !== null
           ) {
-            cell.style.backgroundColor = "green";
+            cell.className = "hasShip";
             if (
               player.board.board[cell.dataset.y][cell.dataset.x].ship.isSunk()
             ) {
@@ -82,6 +80,8 @@ export function renderBoard(player) {
       const cells = board.querySelectorAll("button");
       cells.forEach((cell) => {
         cell.disabled = true;
+        cell.className = "cell";
+        cell.textContent = "";
         if (player.board.board[cell.dataset.y][cell.dataset.x].hitStatus) {
           cell.disabled = true;
           cell.className = "hit";
@@ -95,6 +95,27 @@ export function renderBoard(player) {
               isSunkDisplay(board, player);
             }
           }
+        }
+      });
+    }
+  });
+}
+export function placeShipsRender(player) {
+  const boards = document.querySelectorAll(".board");
+  boards.forEach((board) => {
+    if (board.dataset.pName === player.name) {
+      const cells = board.querySelectorAll("button");
+      cells.forEach((cell) => {
+        cell.disabled = true;
+        if (player.board.board[cell.dataset.y][cell.dataset.x].ship !== null) {
+          cell.dataset.ship =
+            player.board.board[cell.dataset.y][cell.dataset.x].ship.name;
+          cell.className = "hasShip";
+          cell.textContent =
+            player.board.board[cell.dataset.y][cell.dataset.x].ship.length;
+        } else {
+          cell.className = "cell";
+          cell.textContent = "";
         }
       });
     }
