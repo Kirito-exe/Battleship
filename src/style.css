@@ -81,3 +81,15 @@ a {
 .buttons button:hover {
   background: none;
 }
+
+.winning {
+  padding: 5em 10em;
+  background-color: #152035;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+.winning div {
+  font-size: 2em;
+  font-weight: bold;
+}

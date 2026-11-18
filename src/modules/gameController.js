@@ -5,6 +5,7 @@ import {
   enableBoard,
   placeShipsRender,
   renderBoard,
+  winningDialog,
 } from "./DOM.js";
 export function gameController() {
   const buttons = document.querySelector(".buttons");
@@ -19,25 +20,25 @@ export function gameController() {
   buttons.appendChild(start);
 
   const comp = new computer("computer");
-  const p1 = new realPlayer("player1");
+  const p1 = new realPlayer("player");
   createBoard(p1);
   createBoard(comp);
   let active = p1;
   let inactive = comp;
   function playRound() {
-    if (inactive === comp) {
-      comp.randomAttack(p1);
-      renderBoard(p1);
-    }
     if (winningCondition(comp)) {
-      alert(`${active.name} won`);
+      winningDialog(p1);
       disableBoard(active);
       disableBoard(inactive);
     }
     if (winningCondition(p1)) {
-      alert(`${inactive.name} won`);
+      winningCondition(comp);
       disableBoard(active);
       disableBoard(inactive);
+    }
+    if (inactive === comp) {
+      comp.randomAttack(p1);
+      renderBoard(p1);
     }
   }
   function startGame() {

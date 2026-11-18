@@ -124,3 +124,9 @@ export function placeShipsRender(player) {
     }
   });
 }
+export function winningDialog(player) {
+  const dialog = document.querySelector(".winning");
+  const div = dialog.querySelector("div");
+  div.textContent = `${player.name} won!`;
+  dialog.showModal();
+}
