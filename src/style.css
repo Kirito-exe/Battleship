@@ -34,3 +34,9 @@ body {
 .hit {
   background-color: orange;
 }
+.cell {
+  background-color: white;
+}
+.hasShip {
+  background-color: green;
+}
