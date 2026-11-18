@@ -41,11 +41,11 @@ export function gameController() {
     enableBoard(comp);
     disableBoard(active);
     const boards = document.querySelectorAll(".board");
-    comp.randomShipPlace("carrier", 5, "hori");
-    comp.randomShipPlace("battleship", 4, "hori");
-    comp.randomShipPlace("destroyer", 3, "hori");
-    comp.randomShipPlace("submarine", 3, "hori");
-    comp.randomShipPlace("patrol", 2, "hori");
+    comp.randomShipPlace("carrier", 5, randomAlignment());
+    comp.randomShipPlace("battleship", 4, randomAlignment());
+    comp.randomShipPlace("destroyer", 3, randomAlignment());
+    comp.randomShipPlace("submarine", 3, randomAlignment());
+    comp.randomShipPlace("patrol", 2, randomAlignment());
     boards.forEach((board) => {
       const cells = board.querySelectorAll("button");
       cells.forEach((cell) => {
@@ -67,11 +67,11 @@ export function gameController() {
   function placeShip() {
     random.addEventListener("click", () => {
       p1.board.delAllShips();
-      p1.randomShipPlace("carrier", 5, "hori");
-      p1.randomShipPlace("battleship", 4, "hori");
-      p1.randomShipPlace("destroyer", 3, "hori");
-      p1.randomShipPlace("submarine", 3, "hori");
-      p1.randomShipPlace("patrol", 2, "hori");
+      p1.randomShipPlace("carrier", 5, randomAlignment());
+      p1.randomShipPlace("battleship", 4, randomAlignment());
+      p1.randomShipPlace("destroyer", 3, randomAlignment());
+      p1.randomShipPlace("submarine", 3, randomAlignment());
+      p1.randomShipPlace("patrol", 2, randomAlignment());
       placeShipsRender(p1);
     });
   }
@@ -89,6 +89,14 @@ export function gameController() {
     if (player.board.shipStatus().length === player.board.shipsArr.length)
       return true;
     return false;
+  }
+  function randomAlignment() {
+    const random = Math.floor(Math.random() * 2);
+    if (random === 0) {
+      return "hori";
+    } else {
+      return "vert";
+    }
   }
   flowControl();
 }
