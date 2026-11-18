@@ -24,7 +24,7 @@ export default class Gameboard {
       } else {
         this.#board[x][y].toggleHit();
         this.#board[x][y].ship.hit();
-        return this.#board[x][y].hitStatus;
+        return "ship";
       }
     } else {
       return false;
