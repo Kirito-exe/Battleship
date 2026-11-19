@@ -89,6 +89,10 @@ export function gameController() {
       p1.randomShipPlace("submarine", 3, randomAlignment());
       p1.randomShipPlace("patrol", 2, randomAlignment());
       placeShipsRender(p1);
+      const placementShips = document.querySelectorAll(".placementShip");
+      placementShips.forEach((ship) => {
+        ship.draggable = false;
+      });
       start.disabled = false;
     });
   }
