@@ -105,6 +105,7 @@ export function gameController() {
       startGame();
       random.disabled = true;
       start.disabled = true;
+      align.disabled = true;
     });
   }
   function winningCondition(player) {

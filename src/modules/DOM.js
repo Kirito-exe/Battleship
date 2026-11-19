@@ -169,6 +169,11 @@ export function dragElements(alignment, player) {
   }
   box.textContent = "";
   box.className = "placementContainer";
+  if (alignment === "vert") {
+    box.style.gridAutoFlow = "column";
+  } else {
+    box.style.gridAutoFlow = "row";
+  }
   box.appendChild(createShip("carrier", 5, alignment, player));
   box.appendChild(createShip("battleship", 4, alignment, player));
   box.appendChild(createShip("destroyer", 3, alignment, player));

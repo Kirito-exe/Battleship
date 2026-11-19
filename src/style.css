@@ -88,7 +88,8 @@ a {
   opacity: 0.6;
 }
 .buttons button:hover {
-  background: none;
+  background: white;
+  color: #101828;
 }
 
 .winning {
@@ -113,8 +114,8 @@ a {
   border: 0.3px solid black;
 }
 .placementContainer {
+  gap: 0.5em;
   display: grid;
-  grid-template-rows: repeat(5, 1fr);
   justify-items: start;
   align-items: center;
   margin: 3em;
