@@ -34,11 +34,11 @@ export default class Gameboard {
     const [y, x] = startCoords;
     if (!isSafeMove(startCoords)) throw new RangeError("bad start coords");
     if (alignment === "hori") {
-      if (!isSafeMove([x, y + shiplen])) {
+      if (!isSafeMove([x, y + shiplen - 1])) {
         return false;
       }
     } else if (alignment === "vert") {
-      if (!isSafeMove([x + shiplen, y])) {
+      if (!isSafeMove([x + shiplen - 1, y])) {
         return false;
       }
     } else {
@@ -46,6 +46,7 @@ export default class Gameboard {
     }
     for (let i = 0; i < shiplen; i++) {
       if (alignment === "hori") {
+        console.log([x, y + i]);
         if (this.#board[x][y + i].ship !== null) {
           return false;
         }

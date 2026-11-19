@@ -102,3 +102,32 @@ a {
   font-size: 2em;
   font-weight: bold;
 }
+
+.placementShip {
+  display: grid;
+}
+.placingCell {
+  width: 30px;
+  height: 30px;
+  background-color: green;
+  border: 0.3px solid black;
+}
+.placementContainer {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  justify-items: start;
+  align-items: center;
+  margin: 3em;
+  padding: 1.5em;
+  justify-self: center;
+  background-color: rgb(57, 57, 189);
+  position: relative;
+}
+.placementContainer::before {
+  content: "Place ur ships Captain";
+  font-weight: bold;
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  color: white;
+}

@@ -2,6 +2,7 @@ import { realPlayer, computer } from "./players.js";
 import {
   createBoard,
   disableBoard,
+  dragElements,
   enableBoard,
   placeShipsRender,
   renderBoard,
@@ -12,8 +13,14 @@ export function gameController() {
   const container = document.querySelector(".container");
   const random = document.createElement("button");
   const start = document.createElement("button");
+  const align = document.createElement("button");
+  let globalAlign = "hori";
+  const clear = document.createElement("button");
+  align.textContent = `Alignment change: ${globalAlign}`;
+  clear.textContent = "clear";
   buttons.textContent = "";
   start.textContent = "start";
+  start.id = "start";
   container.textContent = "";
   random.textContent = "random";
   buttons.appendChild(random);
@@ -22,7 +29,6 @@ export function gameController() {
   const comp = new computer("Computer");
   const p1 = new realPlayer("Player");
   createBoard(p1);
-  createBoard(comp);
   let active = p1;
   let inactive = comp;
   async function playRound() {
@@ -68,9 +74,15 @@ export function gameController() {
   //   inactive = temp;
   // }
 
+  align.addEventListener("click", () => {
+    globalAlign = globalAlign === "hori" ? "vert" : "hori";
+    align.textContent = `Alignment change: ${globalAlign}`;
+    dragElements(globalAlign, p1);
+  });
+  buttons.appendChild(align);
   function placeShip() {
+    dragElements(globalAlign, p1);
     random.addEventListener("click", () => {
-      start.disabled = false;
       p1.board.delAllShips();
       p1.randomShipPlace("carrier", 5, randomAlignment());
       p1.randomShipPlace("battleship", 4, randomAlignment());
@@ -78,14 +90,18 @@ export function gameController() {
       p1.randomShipPlace("submarine", 3, randomAlignment());
       p1.randomShipPlace("patrol", 2, randomAlignment());
       placeShipsRender(p1);
+      start.disabled = false;
     });
   }
   function flowControl() {
-    start.disabled = true;
     disableBoard(p1);
     disableBoard(comp);
+    start.disabled = true;
     placeShip();
+    const placementContainer = document.querySelector(".placementContainer");
     start.addEventListener("click", () => {
+      createBoard(comp);
+      container.removeChild(placementContainer);
       startGame();
       random.disabled = true;
       start.disabled = true;
