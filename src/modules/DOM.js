@@ -27,7 +27,6 @@ export function createBoard(player) {
         e.preventDefault();
       });
       cell.addEventListener("drop", (event) => {
-        console.log("i ran");
         event.preventDefault();
         const name = event.dataTransfer.getData("name");
         const ship = document.querySelector(`#${name}`);
@@ -36,14 +35,12 @@ export function createBoard(player) {
         }
         const len = event.dataTransfer.getData("length");
         const alignment = event.dataTransfer.getData("alignment");
-        console.log(name, len, alignment, [cell.dataset.x, cell.dataset.y]);
         const condition = player.board.placeShip(
           [parseInt(cell.dataset.x), parseInt(cell.dataset.y)],
           name,
           parseInt(len),
           alignment,
         );
-        console.log(condition);
         if (condition) {
           ship.draggable = false;
         }
@@ -169,6 +166,11 @@ export function dragElements(alignment, player) {
   }
   box.textContent = "";
   box.className = "placementContainer";
+  if (alignment === "vert") {
+    box.style.gridAutoFlow = "column";
+  } else {
+    box.style.gridAutoFlow = "row";
+  }
   box.appendChild(createShip("carrier", 5, alignment, player));
   box.appendChild(createShip("battleship", 4, alignment, player));
   box.appendChild(createShip("destroyer", 3, alignment, player));
@@ -180,13 +182,7 @@ function createShip(name, length, alignment, player) {
   ship.className = "placementShip";
   ship.draggable = true;
   ship.id = name;
-  console.log(player.board.shipsArr.map((ship) => ship.name));
-  console.log(name);
-  console.log(
-    player.board.shipsArr.map((shipele) => shipele.name).includes(name),
-  );
   if (player.board.shipsArr.map((shipele) => shipele.name).includes(name)) {
-    console.log("i ran");
     ship.draggable = false;
   }
   ship.addEventListener("dragstart", (event) => {

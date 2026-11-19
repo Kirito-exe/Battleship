@@ -46,7 +46,6 @@ export default class Gameboard {
     }
     for (let i = 0; i < shiplen; i++) {
       if (alignment === "hori") {
-        console.log([x, y + i]);
         if (this.#board[x][y + i].ship !== null) {
           return false;
         }
@@ -75,14 +74,11 @@ export default class Gameboard {
     return this.#board;
   }
   delAllShips() {
-    console.log(this.shipsArr);
     this.shipsArr = [];
-    console.log(this.shipsArr);
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
         if (this.#board[y][x].ship !== null) {
           this.#board[y][x].ship = null;
-          console.log(this.#board[y][x].ship);
         }
       }
     }

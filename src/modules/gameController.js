@@ -61,7 +61,6 @@ export function gameController() {
       cells.forEach((cell) => {
         cell.addEventListener("click", () => {
           playRound();
-          console.log("hi");
         });
       });
     });
@@ -105,6 +104,7 @@ export function gameController() {
       startGame();
       random.disabled = true;
       start.disabled = true;
+      align.disabled = true;
     });
   }
   function winningCondition(player) {

@@ -16,7 +16,6 @@ class player {
     ];
     let condition = this.gb.placeShip(coords, name, len, alignment);
     while (!condition) {
-      console.log("loop ran for " + name);
       coords = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
       condition = this.gb.placeShip(coords, name, len, alignment);
     }
@@ -36,8 +35,6 @@ export class computer extends player {
     return true;
   }
   randomAttack(player) {
-    console.log(this.queue);
-    console.log("random attack ran");
     let coords;
     if (this.queue.length === 0) {
       coords = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
@@ -45,7 +42,6 @@ export class computer extends player {
       coords = this.queue.pop();
     }
     let condition = player.board.receiveAttack(coords);
-    console.log(condition);
     if (condition === "ship") {
       const nextSteps = generateNextSteps(coords);
       this.queue.push(...nextSteps);
